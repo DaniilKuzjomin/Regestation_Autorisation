@@ -1,0 +1,3 @@
+from MyModule import *
+
+menu()
