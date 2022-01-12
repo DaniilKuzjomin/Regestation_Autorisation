@@ -1,10 +1,9 @@
 from random import *
 
-users=["Daniil"]
-passwords=["505034"]
-
 
 def menu():
+    """Peamenüü, millega kasutaja saab registreeruda või sisse logida
+    """
     while True:
         print("Добро пожаловать!")
         print("1 - Регистрация")
@@ -39,6 +38,7 @@ def menu():
                         users.append(login)
                         passwords.append(ps)
                     else:
+                        print()
                         print("Извините, но Ваш пароль не подходить.")
                         print()
         if a==2:
@@ -46,7 +46,7 @@ def menu():
             login=str(input("Ваш логин - "))
             password=str(input("Ваш пароль - "))
             check=autorisation_check(login,password)
-            if check==True and check1==True:
+            if check==True:
                 print("Успешный вход, добро пожаловать!")
             else:
                 print("Неверный логин либо пароль! Попробуйте ещё раз.")
@@ -55,6 +55,8 @@ def menu():
 
 
 def auto_pass():
+    """Genereerib kasutajatele random parool
+    """
     str0=".,:;!_*-+()/#¤%&"
     str1 = '0123456789'
     str2 = 'qwertyuiopasdfghjklzxcvbnm'
@@ -67,19 +69,22 @@ def auto_pass():
     return ls
 
 def pass_check(passwords:str)-> bool:
-    """Проверяет присутствуют ли в пароле числа, большие и маленькие буквы и есть ли в них символы.
+    """Kontrollib, kas parool sobib kõikidele parameetritele
+    :param str passwords:
+    :rtype: bool
     """
     spisok=list(passwords)
+    c=b=u=l=s=0
     for p in spisok:
-        if p.isdigit():
+        if p.isdigit(): # Состоит ли пароль из цифр
             c=True
-        if p.isalpha():
+        if p.isalpha(): # Состоит ли пароль из букв
             b=True
-        if p.isupper():
+        if p.isupper(): # Состоит ли пароль из символов в верхнем регистре
             u=True
-        if p.islower():
+        if p.islower(): # Состоит ли пароль из символов в нижнем регистре 
             l=True
-        if p in list(".,:;!_*-+()/#¤%&"):
+        if p in list(".,:;!_*-+()/#¤%&"): # Состоит ли пароль из указанных символов
             s=True
         if c==True and b==True and u==True and l==True and s==True:
             check=True
@@ -87,14 +92,19 @@ def pass_check(passwords:str)-> bool:
             check=False
             return check
 
-def autorisation_check(login,password):
+def autorisation_check(login:str,password:str):
+    """Kontrollib, kas loendis on selline kasutaja ja parool
+    :param str login:
+    :param str password:
+    :rtype: bool
+    """
+    a=b=0
     if login in users:
+        a=True
+    if password in passwords:
+        b=True
+    if a==True and b==True:
         check=True
     else:
         check=False
-    if password in passwords:
-        check1=True
-    else:
-        check1=False
         return check
-        return check1
