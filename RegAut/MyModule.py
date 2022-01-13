@@ -1,5 +1,7 @@
 from random import *
 
+users=[]
+passwords=[]
 
 def menu():
     """Peamenüü, millega kasutaja saab registreeruda või sisse logida
@@ -74,7 +76,7 @@ def pass_check(passwords:str)-> bool:
     :rtype: bool
     """
     spisok=list(passwords)
-    c=b=u=l=s=0
+    c=b=u=l=s=False
     for p in spisok:
         if p.isdigit(): # Состоит ли пароль из цифр
             c=True
@@ -90,7 +92,7 @@ def pass_check(passwords:str)-> bool:
             check=True
         else:
             check=False
-            return check
+    return check
 
 def autorisation_check(login:str,password:str):
     """Kontrollib, kas loendis on selline kasutaja ja parool
@@ -98,13 +100,13 @@ def autorisation_check(login:str,password:str):
     :param str password:
     :rtype: bool
     """
-    a=b=0
+    a=b=False
     if login in users:
         a=True
     if password in passwords:
         b=True
-    if a==True and b==True:
+    if a==True and b==True and users.index(login)==passwords.index(password):
         check=True
     else:
         check=False
-        return check
+    return check
