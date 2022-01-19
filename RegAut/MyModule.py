@@ -37,8 +37,8 @@ def menu():
                     ps=input("Введите свой придуманный пароль: ")
                     check=pass_check(passwords)
                     if check==True:
-                        users.append(login)
-                        passwords.append(ps)
+                        rida_salvestamine("users.txt",login)
+                        rida_salvestamine("passwords.txt",ps)
                     else:
                         print()
                         print("Извините, но Ваш пароль не подходить.")
@@ -110,3 +110,28 @@ def autorisation_check(login:str,password:str):
     else:
         check=False
     return check
+
+
+def failist_lugemine(f:str,l:list):
+    """Info failist f listsisse l
+    """
+    fail=open(f,"r") #,encoding="utf-8-sig"
+    for rida in fail:
+        l.append(rida.strip())
+    fail.close()
+    return l
+
+def failisse_salvestamine(f:str,l:list):
+    """Loetelu salvestame failisse
+    """
+    fail=open(f,"w")
+    for el in l:
+        fail.write(el+"\n")
+    fail.close()
+
+def rida_salvestamine(f:str,rida:str):
+    """Üks sõna või lause(rida) salvestame failisse
+    """
+    fail=open(f,"a")
+    fail.write(rida+"\n")
+    fail.close()
